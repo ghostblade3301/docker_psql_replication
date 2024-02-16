@@ -1,0 +1,21 @@
+version: '3.1'
+
+services:
+  db:
+    container_name: postgres
+    image: postgres:15.0
+    restart: always
+    command: "postgres -c config_file=/config/postgresql.conf"
+    ports:
+      - 5000:5432
+    volumes:
+      - ./pgdata:/data
+      - ./config:/config/
+    env_file:
+      - .env
+  
+  adminer:
+    image: adminer
+    restart: always
+    ports:
+      - 8080:8080
